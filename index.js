@@ -1,0 +1,21 @@
+import { createClient } from '@supabase/server'
+
+const supabase = createClient(
+  process.env.SUPABASE_URL,
+  process.env.SUPABASE_SERVICE_ROLE_KEY
+)
+
+async function main() {
+  const { data, error } = await supabase
+    .from('users')
+    .select('*')
+
+  if (error) {
+    console.error('Ошибка:', error)
+    return
+  }
+
+  console.log('Данные:', data)
+}
+
+main()
